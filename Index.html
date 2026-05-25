@@ -4,144 +4,403 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>HyperCar Dashboard</title>
 
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #0b1120;
+            overflow-x: hidden;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 280px;
+            min-height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 30px 20px;
+        }
+
+        .logo img {
+            width: 170px;
+            border-radius: 20px;
+            filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.45));
+            transition: 0.3s;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-link {
+            color: #cbd5e1;
+            border-radius: 16px;
+            padding: 14px 18px;
+            font-size: 17px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: linear-gradient(90deg, #00e5ff, #0077ff);
+            color: #fff !important;
+            transform: translateX(8px);
+        }
+
+        /* MAIN CONTENT */
+
+        .main-content {
+            margin-left: 280px;
+            padding: 30px;
+        }
+
+        .container-fluid {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        /* TOPBAR */
+
+        .topbar h2 {
+            color: #fff;
+            font-size: 34px;
+            font-weight: bold;
+        }
+
+        .topbar p {
+            color: #94a3b8;
+        }
+
+        .top-icons i {
+            color: #fff;
+            font-size: 22px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .top-icons i:hover {
+            color: #00e5ff;
+            transform: scale(1.1);
+        }
+
+        .profile-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #00e5ff;
+            box-shadow: 0 0 12px rgba(0, 229, 255, 0.5);
+        }
+
+        /* HERO */
+
+        .hero-section {
+            height: 430px;
+            border-radius: 35px;
+            overflow: hidden;
+            position: relative;
+            background: url("Image/Hero.png") center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg,
+                    rgba(0, 0, 0, 0.85),
+                    rgba(0, 0, 0, 0.2));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            max-width: 650px;
+            padding: 60px;
+        }
+
+        .hero-content h1 {
+            color: #fff;
+            font-size: 70px;
+            font-weight: 900;
+            line-height: 85px;
+        }
+
+        .hero-content p {
+            color: #cbd5e1;
+            font-size: 20px;
+            margin: 25px 0;
+        }
+
+        /* STATS */
+
+        .stats-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            transition: 0.4s;
+            color: #fff;
+            padding: 28px;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-10px);
+            background: linear-gradient(135deg, #00e5ff, #0077ff);
+        }
+
+        .stats-card h2 {
+            font-size: 38px;
+            font-weight: bold;
+        }
+
+        .stats-card i {
+            font-size: 42px;
+        }
+
+        /* SECTION TITLE */
+
+        .section-title h3 {
+            color: #fff;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .section-title p {
+            color: #94a3b8;
+        }
+
+        /* CARDS */
+
+        .car-card {
+            background: #111827;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: 0.4s;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            height: 100%;
+        }
+
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 229, 255, 0.25);
+        }
+
+        .car-card img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .car-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .car-content {
+            padding: 24px;
+        }
+
+        .car-content h4 {
+            color: #fff;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .car-content p {
+            color: #94a3b8;
+        }
+
+        .price {
+            color: #00e5ff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .buy-btn {
+            border: none;
+            padding: 12px 24px;
+            border-radius: 14px;
+            background: linear-gradient(90deg, #00e5ff, #0077ff);
+            color: #fff;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+        }
+
+        /* MAP */
+
+        .map-box {
+            border-radius: 30px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .map-box iframe {
+            width: 100%;
+            min-height: 400px;
+            border: 0;
+            filter: grayscale(0.2) contrast(1.1);
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 991px) {
+
+            .sidebar {
+                width: 100%;
+                position: relative;
+                min-height: auto;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .hero-content {
+                padding: 30px;
+            }
+
+            .hero-content h1 {
+                font-size: 45px;
+                line-height: 60px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .hero-section {
+                height: auto;
+            }
+        }
+    </style>
 
 </head>
 
 <body>
-
-    <!-- Sidebar -->
+    <!-- SIDEBAR -->
 
     <div class="sidebar">
 
-        <div class="logo">
-
-            <img src="Image/Logo.png" alt="RM Motors Logo">
-
+        <div class="logo text-center mb-5">
+            <img src="Image/Logo.png" alt="">
         </div>
 
-        <ul>
+        <ul class="nav flex-column gap-2">
 
-            <li class="active">
+            <!-- DASHBOARD -->
 
-                <a href="#">
-
-                    <i class="fa-solid fa-house"></i>
-
+            <li class="nav-item">
+                <a href="index.html" class="nav-link active">
+                    <i class="fa-solid fa-house me-2"></i>
                     Dashboard
-
                 </a>
-
             </li>
 
-            <li>
+            <!-- COLLECTIONS -->
 
-                <a href="#">
-
-                    <i class="fa-solid fa-car"></i>
-
+            <li class="nav-item">
+                <a href="Collections.html" class="nav-link">
+                    <i class="fa-solid fa-car me-2"></i>
                     Collections
-
                 </a>
-
             </li>
 
-            <li>
+            <!-- ANALYTICS -->
 
-                <a href="#">
-
-                    <i class="fa-solid fa-chart-line"></i>
-
+            <li class="nav-item">
+                <a href="Analytics.html" class="nav-link">
+                    <i class="fa-solid fa-chart-line me-2"></i>
                     Analytics
-
                 </a>
-
             </li>
 
-            <li>
+            <!-- CUSTOMERS -->
 
-                <a href="#">
-
-                    <i class="fa-solid fa-user-group"></i>
-
+            <li class="nav-item">
+                <a href="Customers.html" class="nav-link">
+                    <i class="fa-solid fa-user-group me-2"></i>
                     Customers
-
                 </a>
-
             </li>
 
-            <li>
+            <!-- REVENUE -->
 
-                <a href="#">
-
-                    <i class="fa-solid fa-wallet"></i>
-
+            <li class="nav-item">
+                <a href="Revenue.html" class="nav-link">
+                    <i class="fa-solid fa-wallet me-2"></i>
                     Revenue
-
                 </a>
-
             </li>
 
-            <li>
+            <!-- SETTINGS -->
 
-                <a href="#">
-
-                    <i class="fa-solid fa-gear"></i>
-
+            <li class="nav-item">
+                <a href="Settings.html" class="nav-link">
+                    <i class="fa-solid fa-gear me-2"></i>
                     Settings
-
                 </a>
-
             </li>
 
         </ul>
 
     </div>
-
-    <!-- Main Content -->
+    <!-- MAIN CONTENT -->
 
     <div class="main-content">
 
-        <!-- Navbar -->
+        <!-- TOPBAR -->
 
-        <div class="topbar">
+        <div class="topbar d-flex justify-content-between align-items-center flex-wrap gap-3 mb-5">
 
             <div>
-
-                <h2>
-                    Rohit Car Collection
-                </h2>
-
-                <p>
-                    Premium Luxury Cars Dashboard
-                </p>
-
+                <h2>Rohit Car Collection</h2>
+                <p>Premium Luxury Cars Dashboard</p>
             </div>
 
-            <div class="top-icons">
+            <div class="top-icons d-flex align-items-center gap-4">
 
                 <i class="fa-solid fa-bell"></i>
 
                 <i class="fa-solid fa-envelope"></i>
 
-                <img src="Image/My profile.jpg"
-                    alt="RM Motors gold and silver shield logo with a stylized car silhouette">
+                <img src="Image/My profile.jpg" class="profile-img" alt="">
 
             </div>
 
         </div>
 
-        <!-- Hero -->
+        <!-- HERO -->
 
         <div class="hero-section">
 
@@ -158,7 +417,7 @@
                     Experience the future of luxury supercars in one powerful dashboard.
                 </p>
 
-                <button class="btn btn-warning btn-lg">
+                <button class="btn btn-warning btn-lg px-4">
                     Explore Cars
                 </button>
 
@@ -166,449 +425,294 @@
 
         </div>
 
-        <!-- Stats -->
+        <!-- STATS -->
 
         <div class="container-fluid mt-5">
 
             <div class="row g-4">
 
                 <div class="col-lg-3 col-md-6">
-
-                    <div class="stats-card">
-
+                    <div class="stats-card d-flex justify-content-between align-items-center h-100">
                         <div>
-
                             <h2>250+</h2>
-
                             <p>Luxury Cars</p>
-
                         </div>
-
                         <i class="fa-solid fa-car-side"></i>
-
                     </div>
-
                 </div>
 
                 <div class="col-lg-3 col-md-6">
-
-                    <div class="stats-card">
-
+                    <div class="stats-card d-flex justify-content-between align-items-center h-100">
                         <div>
-
                             <h2>₹98Cr</h2>
-
                             <p>Total Revenue</p>
-
                         </div>
-
                         <i class="fa-solid fa-indian-rupee-sign"></i>
-
                     </div>
-
                 </div>
 
                 <div class="col-lg-3 col-md-6">
-
-                    <div class="stats-card">
-
+                    <div class="stats-card d-flex justify-content-between align-items-center h-100">
                         <div>
-
                             <h2>120+</h2>
-
                             <p>Customers</p>
-
                         </div>
-
                         <i class="fa-solid fa-users"></i>
-
                     </div>
-
                 </div>
 
                 <div class="col-lg-3 col-md-6">
-
-                    <div class="stats-card">
-
+                    <div class="stats-card d-flex justify-content-between align-items-center h-100">
                         <div>
-
                             <h2>98%</h2>
-
                             <p>Growth</p>
-
                         </div>
-
                         <i class="fa-solid fa-chart-line"></i>
-
                     </div>
-
                 </div>
 
             </div>
 
         </div>
 
-        <!-- Car Collection -->
+        <!-- CAR SECTION -->
 
         <div class="container-fluid mt-5">
 
-            <div class="section-title">
+            <div class="section-title mb-4">
+                <h3>Top Hyper Cars</h3>
+                <p>Luxury Collection of Premium Cars</p>
+            </div>
 
-                <h3>
-                    Top Hyper Cars
-                </h3>
+            <div class="row g-4">
 
-                <p>
-                    Luxury Collection of Premium Cars
-                </p>
+                <!-- CARD -->
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="car-card">
+                        <img src="Image/Ferrari.png" alt="">
+                        <div class="car-content">
+                            <h4>Ferrari F8</h4>
+                            <p>Luxury Italian Hyper Car</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">₹4.5 Cr</span>
+                                <button class="buy-btn">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="car-card">
+                        <img src="Image/Lamborghini.png" alt="">
+                        <div class="car-content">
+                            <h4>Lamborghini</h4>
+                            <p>Powerful Racing Machine</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">₹5.2 Cr</span>
+                                <button class="buy-btn">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="car-card">
+                        <img src="Image/Porsche.png" alt="">
+                        <div class="car-content">
+                            <h4>Porsche 911</h4>
+                            <p>German Performance Car</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">₹3.9 Cr</span>
+                                <button class="buy-btn">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="car-card">
+                        <img src="Image/BMW M8.png" alt="">
+                        <div class="car-content">
+                            <h4>BMW M8</h4>
+                            <p>Premium Sport Sedan</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">₹2.8 Cr</span>
+                                <button class="buy-btn">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="car-card">
+                        <img src="Image/Mercedes AMG.png" alt="">
+                        <div class="car-content">
+                            <h4>Mercedes AMG</h4>
+                            <p>Luxury Premium Coupe</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">₹3.4 Cr</span>
+                                <button class="buy-btn">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="car-card">
+                        <img src="Image/Audi R8.png" alt="">
+                        <div class="car-content">
+                            <h4>Audi R8</h4>
+                            <p>Modern Speed Beast</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">₹4.1 Cr</span>
+                                <button class="buy-btn">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="car-card">
+                        <img src="Image/Bugatti Chiron.png" alt="">
+                        <div class="car-content">
+                            <h4>Bugatti Chiron</h4>
+                            <p>World Fastest Hypercar</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">₹30 Cr</span>
+                                <button class="buy-btn">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="car-card">
+                        <img src="Image/McLaren P1.png" alt="">
+                        <div class="car-content">
+                            <h4>McLaren P1</h4>
+                            <p>Ultimate Hybrid Hypercar</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">₹15 Cr</span>
+                                <button class="buy-btn">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="car-card">
+                        <img src="Image/Rolls Royce.png" alt="">
+                        <div class="car-content">
+                            <h4>Rolls Royce</h4>
+                            <p>Royal Luxury Car</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">₹8.9 Cr</span>
+                                <button class="buy-btn">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="car-card">
+                        <img src="Image/Tesla Roadster.png" alt="">
+                        <div class="car-content">
+                            <h4>Tesla Roadster</h4>
+                            <p>Electric Super Car</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">₹6 Cr</span>
+                                <button class="buy-btn">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="car-card">
+                        <img src="Image/Chevrolet Camaro.png" alt="">
+                        <div class="car-content">
+                            <h4>Chevrolet Camaro</h4>
+                            <p>American Muscle Car</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">₹2.3 Cr</span>
+                                <button class="buy-btn">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="car-card">
+                        <img src="Image/Nissan GTR.png" alt="">
+                        <div class="car-content">
+                            <h4>Nissan GTR</h4>
+                            <p>Japanese Racing Beast</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">₹3.1 Cr</span>
+                                <button class="buy-btn">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- LOCATION SECTION -->
+
+        <div class="container-fluid mt-5">
+
+            <div class="section-title mb-4">
+
+                <h3>Showroom Location</h3>
+
+                <p>Visit Our Premium Car Collection Showroom</p>
 
             </div>
 
             <div class="row g-4">
 
-                <!-- Car 1 -->
+                <!-- ADDRESS -->
 
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4">
 
-                    <div class="car-card">
+                    <div class="stats-card h-100">
 
-                        <img src="Image/Ferrari.png"
-                            alt="Ferrari F8 Tributo in red showcasing sleek design">
+                        <h4 class="text-white mb-4">
+                            <i class="fa-solid fa-location-dot me-2"></i>
+                            Vedant Thane
+                        </h4>
 
-                        <div class="car-content">
+                        <p class="text-light">
+                            Vedant Complex,<br>
+                            Ghodbunder Road,<br>
+                            Thane West,<br>
+                            Maharashtra - 400615
+                        </p>
 
-                            <h4>Ferrari F8</h4>
+                        <p class="text-info mt-4">
+                            Open: 10:00 AM - 9:00 PM
+                        </p>
 
-                            <p>Luxury Italian Hyper Car</p>
-
-                            <div class="bottom">
-
-                                <span>₹4.5 Cr</span>
-
-                                <button>Buy</button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- Car 2 -->
-
-                <div class="col-lg-4 col-md-6">
-
-                    <div class="car-card">
-
-                        <img src="Image/Lamborghini.png"
-                            alt="Lamborghini Aventador in vibrant yellow">
-
-                        <div class="car-content">
-
-                            <h4>Lamborghini</h4>
-
-                            <p>Powerful Racing Machine</p>
-
-                            <div class="bottom">
-
-                                <span>₹5.2 Cr</span>
-
-                                <button>Buy</button>
-
-                            </div>
-
-                        </div>
+                        <button class="buy-btn mt-3">
+                            Get Direction
+                        </button>
 
                     </div>
 
                 </div>
 
-                <!-- Car 3 -->
+                <!-- MAP -->
 
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-8">
 
-                    <div class="car-card">
+                    <div class="map-box">
 
-                        <img src="Image/Porsche.png"
-                            alt="Porsche 911 performance sports car">
-
-                        <div class="car-content">
-
-                            <h4>Porsche 911</h4>
-
-                            <p>German Performance Car</p>
-
-                            <div class="bottom">
-
-                                <span>₹3.9 Cr</span>
-
-                                <button>Buy</button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- Car 4 -->
-
-                <div class="col-lg-4 col-md-6">
-
-                    <div class="car-card">
-
-                        <img src="Image/BMW M8.png"
-                            alt="BMW M8 luxury sport sedan">
-
-                        <div class="car-content">
-
-                            <h4>BMW M8</h4>
-
-                            <p>Premium Sport Sedan</p>
-
-                            <div class="bottom">
-
-                                <span>₹2.8 Cr</span>
-
-                                <button>Buy</button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- Car 5 -->
-
-                <div class="col-lg-4 col-md-6">
-
-                    <div class="car-card">
-
-                        <img src="Image/Mercedes AMG.png"
-                            alt="Mercedes AMG GT luxury coupe">
-
-                        <div class="car-content">
-
-                            <h4>Mercedes AMG</h4>
-
-                            <p>Luxury Premium Coupe</p>
-
-                            <div class="bottom">
-
-                                <span>₹3.4 Cr</span>
-
-                                <button>Buy</button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- Car 6 -->
-
-                <div class="col-lg-4 col-md-6">
-
-                    <div class="car-card">
-
-                        <img src="Image/Audi R8.png"
-                            alt="Audi R8 modern speed beast">
-
-                        <div class="car-content">
-
-                            <h4>Audi R8</h4>
-
-                            <p>Modern Speed Beast</p>
-
-                            <div class="bottom">
-
-                                <span>₹4.1 Cr</span>
-
-                                <button>Buy</button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- Car 7 -->
-
-                <div class="col-lg-4 col-md-6">
-
-                    <div class="car-card">
-
-                        <img src="Image/Bugatti Chiron.png"
-                            alt="Bugatti Chiron world fastest hypercar">
-
-                        <div class="car-content">
-
-                            <h4>Bugatti Chiron</h4>
-
-                            <p>World Fastest Hypercar</p>
-
-                            <div class="bottom">
-
-                                <span>₹30 Cr</span>
-
-                                <button>Buy</button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- Car 8 -->
-
-                <div class="col-lg-4 col-md-6">
-
-                    <div class="car-card">
-
-                        <img src="Image/McLaren P1.png"
-                            alt="McLaren P1 hybrid hypercar">
-
-                        <div class="car-content">
-
-                            <h4>McLaren P1</h4>
-
-                            <p>Ultimate Hybrid Hypercar</p>
-
-                            <div class="bottom">
-
-                                <span>₹15 Cr</span>
-
-                                <button>Buy</button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- Car 9 -->
-
-                <div class="col-lg-4 col-md-6">
-
-                    <div class="car-card">
-
-                        <img src="Image/Rolls Royce.png"
-                            alt="Rolls Royce royal luxury car">
-
-                        <div class="car-content">
-
-                            <h4>Rolls Royce</h4>
-
-                            <p>Royal Luxury Car</p>
-
-                            <div class="bottom">
-
-                                <span>₹8.9 Cr</span>
-
-                                <button>Buy</button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- Car 10 -->
-
-                <div class="col-lg-4 col-md-6">
-
-                    <div class="car-card">
-
-                        <img src="Image/Tesla Roadster.png"
-                            alt="Tesla Roadster electric super car">
-
-                        <div class="car-content">
-
-                            <h4>Tesla Roadster</h4>
-
-                            <p>Electric Super Car</p>
-
-                            <div class="bottom">
-
-                                <span>₹6 Cr</span>
-
-                                <button>Buy</button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- Car 11 -->
-
-                <div class="col-lg-4 col-md-6">
-
-                    <div class="car-card">
-
-                        <img src="Image/Chevrolet Camaro.png"
-                            alt="Chevrolet Camaro muscle car">
-
-                        <div class="car-content">
-
-                            <h4>Chevrolet Camaro</h4>
-
-                            <p>American Muscle Car</p>
-
-                            <div class="bottom">
-
-                                <span>₹2.3 Cr</span>
-
-                                <button>Buy</button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- Car 12 -->
-
-                <div class="col-lg-4 col-md-6">
-
-                    <div class="car-card">
-
-                        <img src="Image/Nissan GTR.png"
-                            alt="Nissan GTR Japanese racing beast">
-
-                        <div class="car-content">
-
-                            <h4>Nissan GTR</h4>
-
-                            <p>Japanese Racing Beast</p>
-
-                            <div class="bottom">
-
-                                <span>₹3.1 Cr</span>
-
-                                <button>Buy</button>
-
-                            </div>
-
-                        </div>
+                        <iframe src="https://www.google.com/maps?q=Vedant+Complex+Thane+West&output=embed"
+                            allowfullscreen="" loading="lazy">
+                        </iframe>
 
                     </div>
 
@@ -619,6 +723,8 @@
         </div>
 
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

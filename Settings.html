@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings - RM Motors</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        body {
+            background: #0f172a;
+            color: white;
+            overflow-x: hidden;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 280px;
+            min-height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: #111827;
+            padding: 30px 20px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo img {
+            width: 160px;
+        }
+
+        .nav-link {
+            color: #cbd5e1;
+            padding: 14px 18px;
+            border-radius: 14px;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: linear-gradient(90deg, #00e5ff, #0077ff);
+            color: #fff !important;
+            transform: translateX(6px);
+        }
+
+        /* MAIN CONTENT */
+
+        .main-content {
+            margin-left: 280px;
+            padding: 40px;
+        }
+
+        /* SETTINGS CARD */
+
+        .settings-card {
+            background: #111827;
+            border-radius: 30px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .form-control,
+        .form-select {
+            background: #1e293b;
+            border: none;
+            color: white;
+            padding: 14px;
+            border-radius: 14px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            background: #1e293b;
+            color: white;
+            box-shadow: none;
+            border: 1px solid #00e5ff;
+        }
+
+        .setting-box {
+            background: #1e293b;
+            border-radius: 20px;
+            padding: 25px;
+            transition: 0.3s;
+            height: 100%;
+        }
+
+        .setting-box:hover {
+            transform: translateY(-8px);
+            background: #263449;
+        }
+
+        .save-btn {
+            background: linear-gradient(90deg, #00e5ff, #0077ff);
+            border: none;
+            color: white;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .save-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+        }
+
+        .toggle-switch {
+            width: 55px;
+            height: 28px;
+            background: #334155;
+            border-radius: 50px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .toggle-switch::before {
+            content: "";
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 3px;
+            left: 4px;
+        }
+
+        @media(max-width:991px) {
+
+            .sidebar {
+                width: 100%;
+                min-height: auto;
+                position: relative;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="logo text-center mb-5">
+            <img src="Image/Logo.png" alt="">
+        </div>
+
+        <ul class="nav flex-column gap-2">
+
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-house me-2"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="Collections.html" class="nav-link">
+                    <i class="fa-solid fa-car me-2"></i>
+                    Collections
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="Analytics.html" class="nav-link">
+                    <i class="fa-solid fa-chart-line me-2"></i>
+                    Analytics
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="Customers.html" class="nav-link">
+                    <i class="fa-solid fa-user-group me-2"></i>
+                    Customers
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="Revenue.html" class="nav-link">
+                    <i class="fa-solid fa-wallet me-2"></i>
+                    Revenue
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="Settings.html" class="nav-link active">
+                    <i class="fa-solid fa-gear me-2"></i>
+                    Settings
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+
+    <div class="main-content">
+
+        <h1 class="fw-bold mb-5">
+            Dashboard Settings
+        </h1>
+
+        <!-- SETTINGS FORM -->
+
+        <div class="settings-card">
+
+            <div class="row g-4">
+
+                <!-- ADMIN NAME -->
+
+                <div class="col-lg-6">
+
+                    <label class="form-label">
+                        Admin Name
+                    </label>
+
+                    <input type="text" class="form-control" value="Rohit Mali">
+
+                </div>
+
+                <!-- EMAIL -->
+
+                <div class="col-lg-6">
+
+                    <label class="form-label">
+                        Email
+                    </label>
+
+                    <input type="email" class="form-control" value="rohit.mali@gmail.com">
+
+                </div>
+
+                <!-- LOCATION -->
+
+                <div class="col-lg-6">
+
+                    <label class="form-label">
+                        Showroom Location
+                    </label>
+
+                    <input type="text" class="form-control" value="IT Vedant Thane">
+
+                </div>
+
+                <!-- LANGUAGE -->
+
+                <div class="col-lg-6">
+
+                    <label class="form-label">
+                        Dashboard Language
+                    </label>
+
+                    <select class="form-select">
+
+                        <option>English</option>
+                        <option>Hindi</option>
+                        <option>Marathi</option>
+
+                    </select>
+
+                </div>
+
+                <!-- PASSWORD -->
+
+                <div class="col-lg-6">
+
+                    <label class="form-label">
+                        Change Password
+                    </label>
+
+                    <input type="password" class="form-control" placeholder="Enter New Password">
+
+                </div>
+
+                <!-- PHONE -->
+
+                <div class="col-lg-6">
+
+                    <label class="form-label">
+                        Contact Number
+                    </label>
+
+                    <input type="text" class="form-control" value="+91 9860352102">
+
+                </div>
+
+            </div>
+
+            <!-- SAVE BUTTON -->
+
+            <button class="save-btn mt-5">
+                Save Changes
+            </button>
+
+        </div>
+
+        <!-- EXTRA SETTINGS -->
+
+        <div class="row g-4 mt-4">
+
+            <!-- NOTIFICATION -->
+
+            <div class="col-lg-4">
+
+                <div class="setting-box">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                        <h4>
+                            Notifications
+                        </h4>
+
+                        <div class="toggle-switch"></div>
+
+                    </div>
+
+                    <p class="text-secondary">
+                        Enable dashboard alerts and updates.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- DARK MODE -->
+
+            <div class="col-lg-4">
+
+                <div class="setting-box">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                        <h4>
+                            Dark Mode
+                        </h4>
+
+                        <div class="toggle-switch"></div>
+
+                    </div>
+
+                    <p class="text-secondary">
+                        Premium dark UI appearance enabled.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- SECURITY -->
+
+            <div class="col-lg-4">
+
+                <div class="setting-box">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                        <h4>
+                            Security Access
+                        </h4>
+
+                        <div class="toggle-switch"></div>
+
+                    </div>
+
+                    <p class="text-secondary">
+                        Enable extra dashboard protection.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PROFILE CARD -->
+
+        <div class="settings-card mt-5">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-2 text-center">
+
+                    <img src="Image/My profile.jpg" class="rounded-circle" width="120">
+
+                </div>
+
+                <div class="col-lg-10">
+
+                    <h3 class="fw-bold">
+                        Rohit Mali
+                    </h3>
+
+                    <p class="text-secondary">
+                        RM Motors Administrator
+                    </p>
+
+                    <button class="save-btn mt-2">
+                        Update Profile
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
